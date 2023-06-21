@@ -18,5 +18,16 @@ namespace AoC2017Test
                 Assert.That(d.CaptchaSumOpposite(), Is.EqualTo(1508));
             });
         }
+
+        [Test]
+        public void Day02()
+        {
+            var d = new Day02();
+            Assert.Multiple(() =>
+            {
+                Assert.That(d.SumOfBiggestDifferences(), Is.EqualTo(50376));
+                Assert.That(d.SumOfEvenlyDivisibleNumbers(), Is.EqualTo(267));
+            });
+        }
     }
 }
