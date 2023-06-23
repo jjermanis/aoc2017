@@ -49,5 +49,25 @@ namespace AoC2017Test
             Assert.That(t2.SumOfEvenlyDivisibleNumbers(), Is.EqualTo(9));
         }
 
+        [Test]
+        public void Day03()
+        {
+            var t11 = new Day03(1);
+            Assert.That(t11.DistanceByCount(), Is.EqualTo(0));
+            var t12 = new Day03(12);
+            Assert.That(t12.DistanceByCount(), Is.EqualTo(3));
+            var t13 = new Day03(23);
+            Assert.That(t13.DistanceByCount(), Is.EqualTo(2));
+            var t14 = new Day03(1024);
+            Assert.That(t14.DistanceByCount(), Is.EqualTo(31));
+
+            var t21 = new Day03(9);
+            Assert.That(t21.NeighborSumLargerThanInput(), Is.EqualTo(10));
+            var t22 = new Day03(50);
+            Assert.That(t22.NeighborSumLargerThanInput(), Is.EqualTo(54));
+            var t23 = new Day03(500);
+            Assert.That(t23.NeighborSumLargerThanInput(), Is.EqualTo(747));
+        }
+
     }
 }
