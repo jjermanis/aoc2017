@@ -40,5 +40,16 @@ namespace AoC2017Test
                 Assert.That(d.NeighborSumLargerThanInput(), Is.EqualTo(266330));
             });
         }
+
+        [Test]
+        public void Day04()
+        {
+            var d = new Day04();
+            Assert.Multiple(() =>
+            {
+                Assert.That(d.ValidCountExactMatch(), Is.EqualTo(466));
+                Assert.That(d.ValidCountAnagrams(), Is.EqualTo(251));
+            });
+        }
     }
 }

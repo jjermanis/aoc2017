@@ -69,5 +69,14 @@ namespace AoC2017Test
             Assert.That(t23.NeighborSumLargerThanInput(), Is.EqualTo(747));
         }
 
+        [Test]
+        public void Day04()
+        {
+            var t1 = new Day04("Day04Test01.txt");
+            Assert.That(t1.ValidCountExactMatch(), Is.EqualTo(2));
+
+            var t2 = new Day04("Day04Test02.txt");
+            Assert.That(t2.ValidCountAnagrams(), Is.EqualTo(3));
+        }
     }
 }
