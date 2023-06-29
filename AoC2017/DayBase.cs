@@ -21,7 +21,7 @@ public abstract class DayBase
         => TextFile(fileName).Split().Select(m => int.Parse(m));
 
     protected IEnumerable<int> TextFileIntsSingleLine(string fileName, char delimiter)
-    => TextFile(fileName).Split(delimiter).Select(m => int.Parse(m));
+        => TextFile(fileName).Split(delimiter).Select(m => int.Parse(m));
 
     protected IList<int> TextFileIntListSingleLine(string fileName)
         => TextFileIntsSingleLine(fileName).ToList();

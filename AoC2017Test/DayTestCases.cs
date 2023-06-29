@@ -51,5 +51,16 @@ namespace AoC2017Test
                 Assert.That(d.ValidCountAnagrams(), Is.EqualTo(251));
             });
         }
+
+        [Test]
+        public void Day05()
+        {
+            var d = new Day05();
+            Assert.Multiple(() =>
+            {
+                Assert.That(d.StepsToExit(), Is.EqualTo(373543));
+                Assert.That(d.StepsWithAlternation(), Is.EqualTo(27502966));
+            });
+        }
     }
 }

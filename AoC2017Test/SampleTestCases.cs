@@ -78,5 +78,16 @@ namespace AoC2017Test
             var t2 = new Day04("Day04Test02.txt");
             Assert.That(t2.ValidCountAnagrams(), Is.EqualTo(3));
         }
+
+        [Test]
+        public void Day05()
+        {
+            var t = new Day05("Day05Test01.txt");
+            Assert.Multiple(() =>
+            {
+                Assert.That(t.StepsToExit(), Is.EqualTo(5));
+                Assert.That(t.StepsWithAlternation(), Is.EqualTo(10));
+            });
+        }
     }
 }
