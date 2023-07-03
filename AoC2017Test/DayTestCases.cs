@@ -62,5 +62,16 @@ namespace AoC2017Test
                 Assert.That(d.StepsWithAlternation(), Is.EqualTo(27502966));
             });
         }
+
+        [Test]
+        public void Day06()
+        {
+            var d = new Day06();
+            Assert.Multiple(() =>
+            {
+                Assert.That(d.CyclesUntilDuplicate(), Is.EqualTo(3156));
+                Assert.That(d.DuplicateLoopSize(), Is.EqualTo(1610));
+            });
+        }
     }
 }

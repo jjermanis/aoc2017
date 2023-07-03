@@ -89,5 +89,16 @@ namespace AoC2017Test
                 Assert.That(t.StepsWithAlternation(), Is.EqualTo(10));
             });
         }
+
+        [Test]
+        public void Day06()
+        {
+            var t = new Day06("Day06Test01.txt");
+            Assert.Multiple(() =>
+            {
+                Assert.That(t.CyclesUntilDuplicate(), Is.EqualTo(5));
+                Assert.That(t.DuplicateLoopSize(), Is.EqualTo(4));
+            });
+        }
     }
 }
