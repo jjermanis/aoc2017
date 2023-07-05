@@ -73,5 +73,16 @@ namespace AoC2017Test
                 Assert.That(d.DuplicateLoopSize(), Is.EqualTo(1610));
             });
         }
+
+        [Test]
+        public void Day07()
+        {
+            var d = new Day07();
+            Assert.Multiple(() =>
+            {
+                Assert.That(d.BottomNodeName(), Is.EqualTo("dgoocsw"));
+                Assert.That(d.WeightToAlterTo(), Is.EqualTo(1275));
+            });
+        }
     }
 }

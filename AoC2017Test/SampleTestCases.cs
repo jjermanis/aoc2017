@@ -100,5 +100,16 @@ namespace AoC2017Test
                 Assert.That(t.DuplicateLoopSize(), Is.EqualTo(4));
             });
         }
+
+        [Test]
+        public void Day07()
+        {
+            var t = new Day07("Day07Test01.txt");
+            Assert.Multiple(() =>
+            {
+                Assert.That(t.BottomNodeName(), Is.EqualTo("tknk"));
+                Assert.That(t.WeightToAlterTo(), Is.EqualTo(60));
+            });
+        }
     }
 }
