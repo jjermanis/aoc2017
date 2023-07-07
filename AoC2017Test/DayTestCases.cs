@@ -84,5 +84,16 @@ namespace AoC2017Test
                 Assert.That(d.WeightToAlterTo(), Is.EqualTo(1275));
             });
         }
+
+        [Test]
+        public void Day08()
+        {
+            var d = new Day08();
+            Assert.Multiple(() =>
+            {
+                Assert.That(d.MaxValueAtEnd(), Is.EqualTo(7296));
+                Assert.That(d.MaxValueEver(), Is.EqualTo(8186));
+            });
+        }
     }
 }
