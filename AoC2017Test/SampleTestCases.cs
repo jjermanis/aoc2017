@@ -122,5 +122,15 @@ namespace AoC2017Test
                 Assert.That(t.MaxValueEver(), Is.EqualTo(10));
             });
         }
+
+        [Test]
+        public void Day09()
+        {
+            var t1 = new Day09("Day09Test01.txt");
+            Assert.That(t1.Score(), Is.EqualTo(50));
+
+            var t2 = new Day09("Day09Test02.txt");
+            Assert.That(t2.CharsInGarbageCount(), Is.EqualTo(32));
+        }
     }
 }

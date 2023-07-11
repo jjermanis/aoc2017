@@ -95,5 +95,16 @@ namespace AoC2017Test
                 Assert.That(d.MaxValueEver(), Is.EqualTo(8186));
             });
         }
+
+        [Test]
+        public void Day09()
+        {
+            var d = new Day09();
+            Assert.Multiple(() =>
+            {
+                Assert.That(d.Score(), Is.EqualTo(14190));
+                Assert.That(d.CharsInGarbageCount(), Is.EqualTo(7053));
+            });
+        }
     }
 }
