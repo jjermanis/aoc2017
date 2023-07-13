@@ -106,5 +106,16 @@ namespace AoC2017Test
                 Assert.That(d.CharsInGarbageCount(), Is.EqualTo(7053));
             });
         }
+
+        [Test]
+        public void Day10()
+        {
+            var d = new Day10();
+            Assert.Multiple(() =>
+            {
+                Assert.That(d.KnottedListProduct(), Is.EqualTo(1935));
+                Assert.That(d.KnotHash(), Is.EqualTo("dc7e7dee710d4c7201ce42713e6b8359"));
+            });
+        }
     }
 }
