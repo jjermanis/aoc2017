@@ -145,5 +145,18 @@ namespace AoC2017Test
             var t4 = new Day10("Day10Test05.txt");
             Assert.That(t4.KnotHash(), Is.EqualTo("63960835bcdc130f0b66d7ff4f6a5a8e"));
         }
+
+        [Test]
+        public void Day11()
+        {
+            var t1 = new Day11("Day11Test01.txt");
+            Assert.That(t1.EndStepCount(), Is.EqualTo(3));
+            var t2 = new Day11("Day11Test02.txt");
+            Assert.That(t2.EndStepCount(), Is.EqualTo(0));
+            var t3 = new Day11("Day11Test03.txt");
+            Assert.That(t3.EndStepCount(), Is.EqualTo(2));
+            var t4 = new Day11("Day11Test04.txt");
+            Assert.That(t4.EndStepCount(), Is.EqualTo(3));
+        }
     }
 }

@@ -117,5 +117,16 @@ namespace AoC2017Test
                 Assert.That(d.KnotHash(), Is.EqualTo("dc7e7dee710d4c7201ce42713e6b8359"));
             });
         }
+
+        [Test]
+        public void Day11()
+        {
+            var d = new Day11();
+            Assert.Multiple(() =>
+            {
+                Assert.That(d.EndStepCount(), Is.EqualTo(698));
+                Assert.That(d.MaxStepCount(), Is.EqualTo(1435));
+            });
+        }
     }
 }
