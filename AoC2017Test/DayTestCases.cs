@@ -128,5 +128,16 @@ namespace AoC2017Test
                 Assert.That(d.MaxStepCount(), Is.EqualTo(1435));
             });
         }
+
+        [Test]
+        public void Day12()
+        {
+            var d = new Day12();
+            Assert.Multiple(() =>
+            {
+                Assert.That(d.FirstProgramCount(), Is.EqualTo(152));
+                Assert.That(d.GroupCount(), Is.EqualTo(186));
+            });
+        }
     }
 }

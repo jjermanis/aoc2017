@@ -158,5 +158,16 @@ namespace AoC2017Test
             var t4 = new Day11("Day11Test04.txt");
             Assert.That(t4.EndStepCount(), Is.EqualTo(3));
         }
+
+        [Test]
+        public void Day12()
+        {
+            var t = new Day12("Day12Test01.txt");
+            Assert.Multiple(() =>
+            {
+                Assert.That(t.FirstProgramCount(), Is.EqualTo(6));
+                Assert.That(t.GroupCount(), Is.EqualTo(2));
+            });
+        }
     }
 }
