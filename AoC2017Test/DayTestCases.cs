@@ -139,5 +139,16 @@ namespace AoC2017Test
                 Assert.That(d.GroupCount(), Is.EqualTo(186));
             });
         }
+
+        [Test]
+        public void Day13()
+        {
+            var d = new Day13();
+            Assert.Multiple(() =>
+            {
+                Assert.That(d.TripSeverity(), Is.EqualTo(648));
+                Assert.That(d.SafeDelay(), Is.EqualTo(3933124));
+            });
+        }
     }
 }
