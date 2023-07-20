@@ -180,5 +180,16 @@ namespace AoC2017Test
                 Assert.That(d.SafeDelay(), Is.EqualTo(10));
             });
         }
+
+        [Test]
+        public void Day14()
+        {
+            var d = new Day14("Day14Test01.txt");
+            Assert.Multiple(() =>
+            {
+                Assert.That(d.SquareCount(), Is.EqualTo(8108));
+                Assert.That(d.RegionCount(), Is.EqualTo(1242));
+            });
+        }
     }
 }
