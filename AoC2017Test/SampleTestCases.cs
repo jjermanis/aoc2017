@@ -191,5 +191,7 @@ namespace AoC2017Test
                 Assert.That(d.RegionCount(), Is.EqualTo(1242));
             });
         }
+
+        // No relevant test cases for Day 15
     }
 }

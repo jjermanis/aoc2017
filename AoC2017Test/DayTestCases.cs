@@ -161,5 +161,16 @@ namespace AoC2017Test
                 Assert.That(d.RegionCount(), Is.EqualTo(1018));
             });
         }
+
+        [Test]
+        public void Day15()
+        {
+            var d = new Day15();
+            Assert.Multiple(() =>
+            {
+                Assert.That(d.MatchingCount(), Is.EqualTo(594));
+                Assert.That(d.MatchingCountWithMultiples(), Is.EqualTo(328));
+            });
+        }
     }
 }
