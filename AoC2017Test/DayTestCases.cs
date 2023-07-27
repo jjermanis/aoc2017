@@ -172,5 +172,16 @@ namespace AoC2017Test
                 Assert.That(d.MatchingCountWithMultiples(), Is.EqualTo(328));
             });
         }
+
+        [Test]
+        public void Day16()
+        {
+            var d = new Day16();
+            Assert.Multiple(() =>
+            {
+                Assert.That(d.PositionAfterDance(), Is.EqualTo("jcobhadfnmpkglie"));
+                Assert.That(d.PositionAfterGigaDance(), Is.EqualTo("pclhmengojfdkaib"));
+            });
+        }
     }
 }

@@ -193,5 +193,16 @@ namespace AoC2017Test
         }
 
         // No relevant test cases for Day 15
+
+        [Test]
+        public void Day16()
+        {
+            var d = new Day16("Day16Test01.txt", 5);
+            Assert.Multiple(() =>
+            {
+                Assert.That(d.PositionAfterDance(), Is.EqualTo("baedc"));
+                Assert.That(d.PositionAfterReps(2), Is.EqualTo("ceadb"));
+            });
+        }
     }
 }
