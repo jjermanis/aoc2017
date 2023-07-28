@@ -204,5 +204,17 @@ namespace AoC2017Test
                 Assert.That(d.PositionAfterReps(2), Is.EqualTo("ceadb"));
             });
         }
+
+        [Test]
+        public void Day17()
+        {
+            var t1 = new Day17("Day17Test01.txt");
+            Assert.That(t1.ValueAfter2017(), Is.EqualTo(638));
+
+            // No  test case for 17-2
+        }
+
+
+
     }
 }

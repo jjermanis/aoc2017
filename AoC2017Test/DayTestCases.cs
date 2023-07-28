@@ -183,5 +183,16 @@ namespace AoC2017Test
                 Assert.That(d.PositionAfterGigaDance(), Is.EqualTo("pclhmengojfdkaib"));
             });
         }
+
+        [Test]
+        public void Day17()
+        {
+            var d = new Day17();
+            Assert.Multiple(() =>
+            {
+                Assert.That(d.ValueAfter2017(), Is.EqualTo(136));
+                Assert.That(d.ValueAfter0(), Is.EqualTo(1080289));
+            });
+        }
     }
 }
