@@ -214,7 +214,14 @@ namespace AoC2017Test
             // No  test case for 17-2
         }
 
-
+        [Test]
+        public void Day18()
+        {
+            var t1 = new Day18("Day18Test01.txt");
+            Assert.That(t1.LastSoundPlayed(), Is.EqualTo(4));
+            var t2 = new Day18("Day18Test02.txt");
+            Assert.That(t2.PlayedSoundCount(), Is.EqualTo(3));
+        }
 
     }
 }

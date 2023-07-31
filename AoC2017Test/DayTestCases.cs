@@ -194,5 +194,16 @@ namespace AoC2017Test
                 Assert.That(d.ValueAfter0(), Is.EqualTo(1080289));
             });
         }
+
+        [Test]
+        public void Day18()
+        {
+            var d = new Day18();
+            Assert.Multiple(() =>
+            {
+                Assert.That(d.LastSoundPlayed(), Is.EqualTo(9423));
+                Assert.That(d.PlayedSoundCount(), Is.EqualTo(7620));
+            });
+        }
     }
 }
