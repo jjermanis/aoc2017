@@ -223,5 +223,15 @@ namespace AoC2017Test
             Assert.That(t2.PlayedSoundCount(), Is.EqualTo(3));
         }
 
+        [Test]
+        public void Day19()
+        {
+            var d = new Day19("Day19Test01.txt");
+            Assert.Multiple(() =>
+            {
+                Assert.That(d.PathLetters(), Is.EqualTo("ABCDEF"));
+                Assert.That(d.PathStepCount(), Is.EqualTo(38));
+            });
+        }
     }
 }

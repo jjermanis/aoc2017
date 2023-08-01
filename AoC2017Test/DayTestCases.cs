@@ -205,5 +205,16 @@ namespace AoC2017Test
                 Assert.That(d.PlayedSoundCount(), Is.EqualTo(7620));
             });
         }
+
+        [Test]
+        public void Day19()
+        {
+            var d = new Day19();
+            Assert.Multiple(() =>
+            {
+                Assert.That(d.PathLetters(), Is.EqualTo("YOHREPXWN"));
+                Assert.That(d.PathStepCount(), Is.EqualTo(16734));
+            });
+        }
     }
 }
