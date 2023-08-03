@@ -216,5 +216,16 @@ namespace AoC2017Test
                 Assert.That(d.PathStepCount(), Is.EqualTo(16734));
             });
         }
+
+        [Test]
+        public void Day20()
+        {
+            var d = new Day20();
+            Assert.Multiple(() =>
+            {
+                Assert.That(d.ParticleStayingClosestToOrigin(), Is.EqualTo(308));
+                Assert.That(d.ParticleCountAfterCollisions(), Is.EqualTo(504));
+            });
+        }
     }
 }
