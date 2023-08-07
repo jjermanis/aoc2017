@@ -233,6 +233,7 @@ namespace AoC2017Test
                 Assert.That(d.PathStepCount(), Is.EqualTo(38));
             });
         }
+
         [Test]
         public void Day20()
         {
@@ -240,6 +241,15 @@ namespace AoC2017Test
             Assert.That(t1.ParticleStayingClosestToOrigin(), Is.EqualTo(0));
             var t2 = new Day20("Day20Test02.txt");
             Assert.That(t2.ParticleCountAfterCollisions(), Is.EqualTo(1));
+        }
+
+        [Test]
+        public void Day21()
+        {
+            var t1 = new Day21("Day21Test01.txt");
+            Assert.That(t1.OnPixelCount(2), Is.EqualTo(12));
+
+            // No specific test cases for either part
         }
     }
 }

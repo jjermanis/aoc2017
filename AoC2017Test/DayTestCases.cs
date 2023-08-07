@@ -227,5 +227,16 @@ namespace AoC2017Test
                 Assert.That(d.ParticleCountAfterCollisions(), Is.EqualTo(504));
             });
         }
+
+        [Test]
+        public void Day21()
+        {
+            var d = new Day21();
+            Assert.Multiple(() =>
+            {
+                Assert.That(d.Part1(), Is.EqualTo(205));
+                Assert.That(d.Part2(), Is.EqualTo(3389823));
+            });
+        }
     }
 }
