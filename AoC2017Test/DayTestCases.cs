@@ -234,8 +234,19 @@ namespace AoC2017Test
             var d = new Day21();
             Assert.Multiple(() =>
             {
-                Assert.That(d.Part1(), Is.EqualTo(205));
-                Assert.That(d.Part2(), Is.EqualTo(3389823));
+                Assert.That(d.PixelsAfter5Iterations(), Is.EqualTo(205));
+                Assert.That(d.PixelsAfter18Iterations(), Is.EqualTo(3389823));
+            });
+        }
+
+        [Test]
+        public void Day22()
+        {
+            var d = new Day22();
+            Assert.Multiple(() =>
+            {
+                Assert.That(d.InfectionBurstCount(), Is.EqualTo(5266));
+                Assert.That(d.EvolvedBurstCount(), Is.EqualTo(2511895));
             });
         }
     }

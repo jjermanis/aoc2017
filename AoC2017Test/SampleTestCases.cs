@@ -251,5 +251,16 @@ namespace AoC2017Test
 
             // No specific test cases for either part
         }
+
+        [Test]
+        public void Day22()
+        {
+            var d = new Day22("Day22Test01.txt");
+            Assert.Multiple(() =>
+            {
+                Assert.That(d.InfectionBurstCount(), Is.EqualTo(5587));
+                Assert.That(d.EvolvedBurstCount(), Is.EqualTo(2511944));
+            });
+        }
     }
 }

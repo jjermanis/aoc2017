@@ -30,22 +30,22 @@ public class Day21 : DayBase, IDay
 
     public void Do()
     {
-        Console.WriteLine($"{nameof(Part1)}: {Part1()}");
-        Console.WriteLine($"{nameof(Part2)}: {Part2()}");
+        Console.WriteLine($"{nameof(PixelsAfter5Iterations)}: {PixelsAfter5Iterations()}");
+        Console.WriteLine($"{nameof(PixelsAfter18Iterations)}: {PixelsAfter18Iterations()}");
     }
 
     /// <summary>
     /// Day 21, Part 1
     /// </summary>
     /// <returns>Pixels after 5 iteratons</returns>    
-    public int Part1()
+    public int PixelsAfter5Iterations()
         => OnPixelCount(5);
 
     /// <summary>
     /// Day 21, Part 2
     /// </summary>
     /// <returns>Pixels after 18 iteratons</returns>    
-    public int Part2()
+    public int PixelsAfter18Iterations()
         => OnPixelCount(18);
 
     public int OnPixelCount(int iterations)
