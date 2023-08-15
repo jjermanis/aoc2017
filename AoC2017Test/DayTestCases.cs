@@ -249,5 +249,16 @@ namespace AoC2017Test
                 Assert.That(d.EvolvedBurstCount(), Is.EqualTo(2511895));
             });
         }
+
+        [Test]
+        public void Day23()
+        {
+            var d = new Day23();
+            Assert.Multiple(() =>
+            {
+                Assert.That(d.MulInstructionCount(), Is.EqualTo(4225));
+                Assert.That(d.FinalValueInRegisterH(), Is.EqualTo(905));
+            });
+        }
     }
 }

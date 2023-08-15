@@ -10,7 +10,8 @@ internal class DuetTablet
         Mul,
         Mod,
         Rcv,
-        Jgz
+        Jgz,
+        Jnz
     };
 
     internal interface IInstruction
@@ -163,15 +164,63 @@ internal class DuetTablet
         }
     }
 
-    internal class MulVal : IInstruction
+    internal class SubVal : IInstruction
     {
         private readonly char _registerDest;
         private readonly int _valueSrc;
 
-        public MulVal(char registerDest, int valueSrc)
+        public SubVal(char registerDest, int valueSrc)
         {
             _registerDest = registerDest;
             _valueSrc = valueSrc;
+        }
+
+        public override string ToString()
+            => $"sub {_registerDest} {_valueSrc}";
+
+        public Operator Operator => Operator.Add;
+
+        public long? Execute(Dictionary<char, long> registers)
+        {
+            registers[_registerDest] -= _valueSrc;
+            return null;
+        }
+    }
+
+    internal class SubReg : IInstruction
+    {
+        private readonly char _registerDest;
+        private readonly char _registerSrc;
+
+        public SubReg(char registerDest, char registerSrc)
+        {
+            _registerDest = registerDest;
+            _registerSrc = registerSrc;
+        }
+
+        public override string ToString()
+            => $"sub {_registerDest} {_registerSrc}";
+
+        public Operator Operator => Operator.Add;
+
+        public long? Execute(Dictionary<char, long> registers)
+        {
+            registers[_registerDest] -= registers[_registerSrc];
+            return null;
+        }
+    }
+
+    internal class MulVal : IInstruction
+    {
+        private readonly char _registerDest;
+        private readonly int _valueSrc;
+        private readonly DuetTablet _tablet;
+
+        public MulVal(char registerDest, int valueSrc, DuetTablet tablet)
+        {
+            _registerDest = registerDest;
+            _valueSrc = valueSrc;
+            _tablet = tablet;
         }
 
         public override string ToString()
@@ -182,6 +231,7 @@ internal class DuetTablet
         public long? Execute(Dictionary<char, long> registers)
         {
             registers[_registerDest] *= _valueSrc;
+            _tablet._mulInvokeCount++;
             return null;
         }
 
@@ -191,11 +241,13 @@ internal class DuetTablet
     {
         private readonly char _registerDest;
         private readonly char _registerSrc;
+        private readonly DuetTablet _tablet;
 
-        public MulReg(char registerDest, char registerSrc)
+        public MulReg(char registerDest, char registerSrc, DuetTablet tablet)
         {
             _registerDest = registerDest;
             _registerSrc = registerSrc;
+            _tablet = tablet;
         }
 
         public override string ToString()
@@ -206,6 +258,7 @@ internal class DuetTablet
         public long? Execute(Dictionary<char, long> registers)
         {
             registers[_registerDest] *= registers[_registerSrc];
+            _tablet._mulInvokeCount++;
             return null;
         }
 
@@ -354,6 +407,72 @@ internal class DuetTablet
         }
     }
 
+    internal class JnzRegReg : IInstruction
+    {
+        private readonly char _registerSrc;
+        private readonly char _registerDelta;
+
+        public JnzRegReg(char registerSrc, char registerDelta)
+        {
+            _registerSrc = registerSrc;
+            _registerDelta = registerDelta;
+        }
+
+        public override string ToString()
+            => $"jnz {_registerSrc} {_registerDelta}";
+
+        public Operator Operator => Operator.Jnz;
+
+        public long? Execute(Dictionary<char, long> registers)
+        {
+            return registers[_registerSrc] != 0 ? registers[_registerDelta] : null;
+        }
+    }
+
+    internal class JnzRegVal : IInstruction
+    {
+        private readonly char _registerSrc;
+        private readonly int _valueDelta;
+
+        public JnzRegVal(char registerSrc, int valueDelta)
+        {
+            _registerSrc = registerSrc;
+            _valueDelta = valueDelta;
+        }
+
+        public override string ToString()
+            => $"jnz {_registerSrc} {_valueDelta}";
+
+        public Operator Operator => Operator.Jnz;
+
+        public long? Execute(Dictionary<char, long> registers)
+        {
+            return registers[_registerSrc] != 0 ? _valueDelta : null;
+        }
+    }
+
+    internal class JnzValVal : IInstruction
+    {
+        private readonly int _valueSrc;
+        private readonly int _valueDelta;
+
+        public JnzValVal(int valueSrc, int valueDelta)
+        {
+            _valueSrc = valueSrc;
+            _valueDelta = valueDelta;
+        }
+
+        public override string ToString()
+            => $"jnz {_valueSrc} {_valueDelta}";
+
+        public Operator Operator => Operator.Jnz;
+
+        public long? Execute(Dictionary<char, long> registers)
+        {
+            return _valueSrc != 0 ? _valueDelta : null;
+        }
+    }
+
     private readonly List<IInstruction> _instructions;
     private readonly Dictionary<char, long> _registers;
     private readonly Queue<long> _receivedQueue;
@@ -362,6 +481,7 @@ internal class DuetTablet
     private int _pc;
     private bool _isProgramEnded;
     private long _valuesSent;
+    private long _mulInvokeCount;
 
     public long LastNote { get; set; }
     public DuetTablet? Partner { get; set; }
@@ -397,6 +517,12 @@ internal class DuetTablet
     public long GetValuesSent()
         => _valuesSent;
 
+    public long GetMulInvokeCount()
+        => _mulInvokeCount;
+
+    public long GetRegister(char name)
+        => _registers[name];
+
     public void SetRegister(char name, long value)
         => _registers[name] = value;
 
@@ -429,13 +555,21 @@ internal class DuetTablet
                     else
                         return new AddReg(tokens[1][0], tokens[2][0]);
                 }
+            case "sub":
+                {
+                    var isVal = int.TryParse(tokens[2], out int value);
+                    if (isVal)
+                        return new SubVal(tokens[1][0], value);
+                    else
+                        return new SubReg(tokens[1][0], tokens[2][0]);
+                }
             case "mul":
                 {
                     var isVal = int.TryParse(tokens[2], out int value);
                     if (isVal)
-                        return new MulVal(tokens[1][0], value);
+                        return new MulVal(tokens[1][0], value, this);
                     else
-                        return new MulReg(tokens[1][0], tokens[2][0]);
+                        return new MulReg(tokens[1][0], tokens[2][0], this);
                 }
             case "mod":
                 {
@@ -457,6 +591,17 @@ internal class DuetTablet
                         return new JgzRegVal(tokens[1][0], value2);
                     else
                         return new JgzRegReg(tokens[1][0], tokens[2][0]);
+                }
+            case "jnz":
+                {
+                    var isSrcVal = int.TryParse(tokens[1], out int value1);
+                    var isDstVal = int.TryParse(tokens[2], out int value2);
+                    if (isSrcVal && isDstVal)
+                        return new JnzValVal(value1, value2);
+                    else if (isDstVal)
+                        return new JnzRegVal(tokens[1][0], value2);
+                    else
+                        return new JnzRegReg(tokens[1][0], tokens[2][0]);
                 }
 
             default:
@@ -519,5 +664,55 @@ internal class DuetTablet
             _pc++;
         }
         _isProgramEnded = true;
+    }
+
+    public void RunUntiEnd(bool isOpt)
+    {
+        while (_pc < _progLen)
+        {
+            var curr = _instructions[_pc];
+
+            if (isOpt && _pc == 23)
+            {
+                _registers['d'] = _registers['b'];
+                _registers['g'] = 0;
+
+                if (!IsPrime(_registers['d']))
+                    _registers['f'] = 0;
+            }
+
+            var result = curr.Execute(_registers);
+
+            if (result != null)
+            {
+                var val = result.Value;
+
+                switch (curr.Operator)
+                {
+                    case Operator.Jgz:
+                    case Operator.Jnz:
+                        _pc += (int)(val - 1);
+                        break;
+                    default:
+                        throw new Exception("No result expected for {curr}");
+                }
+            }
+            _pc++;
+        }
+    }
+
+    private static bool IsPrime(long number)
+    {
+        if (number <= 1) return false;
+        if (number == 2) return true;
+        if (number % 2 == 0) return false;
+
+        var boundary = (long)Math.Floor(Math.Sqrt(number));
+
+        for (int i = 3; i <= boundary; i += 2)
+            if (number % i == 0)
+                return false;
+
+        return true;
     }
 }

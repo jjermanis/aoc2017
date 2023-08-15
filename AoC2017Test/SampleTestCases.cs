@@ -262,5 +262,8 @@ namespace AoC2017Test
                 Assert.That(d.EvolvedBurstCount(), Is.EqualTo(2511944));
             });
         }
+
+        // No test cases for Day 23
+
     }
 }
