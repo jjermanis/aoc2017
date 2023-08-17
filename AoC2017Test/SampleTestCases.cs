@@ -265,5 +265,15 @@ namespace AoC2017Test
 
         // No test cases for Day 23
 
+        [Test]
+        public void Day24()
+        {
+            var d = new Day24("Day24Test01.txt");
+            Assert.Multiple(() =>
+            {
+                Assert.That(d.StrongestBridgeStrength(), Is.EqualTo(31));
+                Assert.That(d.LongestBridgeStrength(), Is.EqualTo(19));
+            });
+        }
     }
 }

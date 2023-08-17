@@ -260,5 +260,16 @@ namespace AoC2017Test
                 Assert.That(d.FinalValueInRegisterH(), Is.EqualTo(905));
             });
         }
+
+        [Test]
+        public void Day24()
+        {
+            var d = new Day24();
+            Assert.Multiple(() =>
+            {
+                Assert.That(d.StrongestBridgeStrength(), Is.EqualTo(1511));
+                Assert.That(d.LongestBridgeStrength(), Is.EqualTo(1471));
+            });
+        }
     }
 }
