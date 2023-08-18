@@ -271,5 +271,12 @@ namespace AoC2017Test
                 Assert.That(d.LongestBridgeStrength(), Is.EqualTo(1471));
             });
         }
+
+        [Test]
+        public void Day25()
+        {
+            var d = new Day25();
+            Assert.That(d.DiagnosticChecksum(), Is.EqualTo(3578));
+        }
     }
 }
