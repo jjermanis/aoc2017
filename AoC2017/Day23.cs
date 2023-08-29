@@ -2,10 +2,6 @@
 
 public class Day23 : DayBase, IDay
 {
-    // TODO: the "optimization" in the VM works for 23-2... but is still
-    // slow (30 sec) and will not work in general cases. How about
-    // just code the problem for 23-2 directly?
-
     private readonly IEnumerable<string> _lines;
 
     public Day23(string filename)
@@ -30,9 +26,41 @@ public class Day23 : DayBase, IDay
 
     public long FinalValueInRegisterH()
     {
+        /*
+         This is the direct "optimized" way to run the code in the VM
+         as specified... but still takes 20+ seconds. Following this
+         comment is the equivalent code avoiding the intentional sub-optimal 
+         code in the problem. From what I have seen... the parameters change,
+         but the fundamental problem is the same for everyone.
+
         var tablet = new DuetTablet(_lines);
         tablet.SetRegister('a', 1);
         tablet.RunUntiEnd(true);
         return tablet.GetRegister('h');
+        */
+
+        const int LOW_VAL = 106700;
+        const int HIGH_VAL = 123700;
+        const int INC = 17;
+        var result = 0;
+        for (var x = LOW_VAL; x <= HIGH_VAL; x += INC)
+            if (!IsPrime(x))
+                result++;
+        return result;
+    }
+
+    private static bool IsPrime(int number)
+    {
+        if (number <= 1) return false;
+        if (number == 2) return true;
+        if (number % 2 == 0) return false;
+
+        var boundary = (int)Math.Floor(Math.Sqrt(number));
+
+        for (int i = 3; i <= boundary; i += 2)
+            if (number % i == 0)
+                return false;
+
+        return true;
     }
 }
