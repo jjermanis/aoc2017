@@ -2,8 +2,6 @@
 
 public class Day24 : DayBase, IDay
 {
-    // TODO consolidate Part 1 and 2 into the standard Calculate pattern
-
     private struct Bridge
     {
         public bool[] IsComponentUsed { get; set; }
@@ -32,6 +30,10 @@ public class Day24 : DayBase, IDay
 
     private readonly IList<(int, int)> _components;
 
+    private bool _isCalculated = false;
+    private int _strongestStrength;
+    private int _longestStrength;
+
     public Day24(string filename)
     {
         var lines = TextFileStringList(filename);
@@ -59,42 +61,28 @@ public class Day24 : DayBase, IDay
     /// <returns>Strength of strongest possible bridge</returns>    
     public int StrongestBridgeStrength()
     {
-        var result = 0;
-        var queue = new Queue<Bridge>();
-        queue.Enqueue(new Bridge(_components.Count));
-        while (queue.Count > 0)
-        {
-            var curr = queue.Dequeue();
-            for (var i=0; i < _components.Count; i++)
-            {
-                if (!curr.IsComponentUsed[i])
-                {
-                    var left = _components[i].Item1;
-                    var right = _components[i].Item2;
-                    if (left == curr.CurrComponent ||
-                        right == curr.CurrComponent)
-                    {
-                        var newComp = new Bridge(curr);
-                        newComp.IsComponentUsed[i] = true;
-                        newComp.TotalStrength += left + right;
-                        newComp.CurrComponent = (curr.CurrComponent == left) ? right : left;
-                        result = Math.Max(result, newComp.TotalStrength);
-                        queue.Enqueue(newComp);
-                    }
-                }
-            }
-        }
-        return result;
+        if (!_isCalculated)
+            CalculateProblems();
+        return _strongestStrength;
     }
 
     /// <summary>
-    /// Day 24, Part 1
+    /// Day 24, Part 2
     /// </summary>
     /// <returns>Strength of longest possible bridge</returns>    
     public int LongestBridgeStrength()
     {
+        if (!_isCalculated)
+            CalculateProblems();
+        return _longestStrength;
+    }
+
+    private void CalculateProblems()
+    {
+        _strongestStrength = 0;
+        _longestStrength = 0;
         var maxLen = 0;
-        var maxStrength = 0;
+
         var queue = new Queue<Bridge>();
         queue.Enqueue(new Bridge(_components.Count));
         while (queue.Count > 0)
@@ -113,20 +101,20 @@ public class Day24 : DayBase, IDay
                         newComp.IsComponentUsed[i] = true;
                         newComp.TotalStrength += left + right;
                         newComp.CurrComponent = (curr.CurrComponent == left) ? right : left;
-                            
+
+                        _strongestStrength = Math.Max(_strongestStrength, newComp.TotalStrength);
                         if (newComp.Length > maxLen)
                         {
                             maxLen = newComp.Length;
-                            maxStrength = newComp.TotalStrength;
+                            _longestStrength = newComp.TotalStrength;
                         }
-                        if (newComp.Length == maxLen)
-                            maxStrength = Math.Max(maxStrength, newComp.TotalStrength);
+                        else if (newComp.Length == maxLen)
+                            _longestStrength = Math.Max(_longestStrength, newComp.TotalStrength);
 
                         queue.Enqueue(newComp);
                     }
                 }
             }
         }
-        return maxStrength;
     }
 }
